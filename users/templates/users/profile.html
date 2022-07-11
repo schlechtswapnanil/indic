@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section" style="background:rgba(0,0,0,0.8);" >
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.dp.url }}" style="padding:6px;">
+        <div class="media-body"  style="opacity: 1.0;">
+          <h2 class="account-heading"   style="margin-top:40px;color:white;background-color: rgba(0,0,0,0);">{{ user.profile.name }}</h2>
+          <p style="font-family: Poppins; margin-top:0px; margin-bottom:0px;">{{ user.username }}</p>
+          <p style="font-family: Poppins; "><small>{{ user.email }}</small></p>
+          <p style="font-family: Poppins;">{{user.profile.bio}}</p>
+          <button class="btn btn-dark" type="submit" style="font-family: Poppins;border-radius:13px;margin-bottom:15px;margin-top:3px;margin-left:330px;"><a href="{% url 'profileupdate' %}" style="color:white; font-family:helvetica;">Edit Profile Details</a></button>
+        </div>
+      </div>      
+    </div>
+    {% endblock content %}
+    
+
+
+    {% block content2 %}
+    
+    {% if user.profile.name %}
+    <div class="container" style="margin-top:50px;margin-left:50px; background: rgba(0,0,0,0.8);border-radius:30px; width:500px;"><h2 style="font-family: Poppins; padding:20px;">{{user.profile.name}}'s Posts:</h2></div>
+    {% else %}     
+    <div class="container" style="margin-top:50px;margin-left:50px; background: rgba(0,0,0,0.8);border-radius:30px; width:500px;"><h2 style="font-family: Poppins; padding:20px;">{{user.username}}'s Posts:</h2></div>
+
+    {% endif %}
+          
+    <div class="container">
+    {% for post in posts%}
+      <article class="post">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="post-author">{{ post.author }}</a>
+            <small class="post-date" style="color:white;">{{ post.time }}</small>
+          </div>
+          <h2><a class="post-title" style="color:white;">{{ post.title }}</a></h2>
+          <img style="height:470px; width:665\px; margin-left:14px; object-fit:cover;" class="post-image" src="{{ post.image.url }}">
+          <p class="post-content" style="padding-top:20px;">{{ post.content }}</p>
+        </div>
+      </article>
+    {% endfor %}
+    </div>
+    {% endblock %}

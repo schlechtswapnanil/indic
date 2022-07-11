@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="post-author">{{ post.author }}</a>
+              <small class="post-date" style="color:white;">{{ post.time }}</small>
+            </div>
+            <h2><a class="post-title" style="color:white;">{{ post.title }}</a></h2>
+            <img style="height:470px; width:670px; margin-left:14px; object-fit:cover;" class="post-image" src="{{ post.image.url }}"">
+            <p class="post-content" style="padding-top:20px;">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
